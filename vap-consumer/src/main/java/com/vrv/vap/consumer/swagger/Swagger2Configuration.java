@@ -51,15 +51,6 @@ public class Swagger2Configuration {
                 .build();
     }
 
-   /* private ApiInfo apiInfo() {
-        return new ApiInfoBuilder()
-                .title("swagger RESTful APIs)")
-                .description("swagger RESTful APIs")
-                .termsOfServiceUrl("http://localhost:8087")
-                .contact(new Contact("liujh", "http://www.bing.com", "ljh205_sy@163.com"))
-                .version("v1.0.0")
-                .build();
-    }*/
 }
 
 

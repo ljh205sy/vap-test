@@ -6,4 +6,14 @@ package com.vrv.vap.consumer.service;
  */
 public interface ConsumerService {
 
+    /**
+     * 缓存key-value数据
+     *
+     * @param key
+     * @return string
+     */
+    String cacheQax(String key);
+
+    String cacheMenu(String key);
+
 }

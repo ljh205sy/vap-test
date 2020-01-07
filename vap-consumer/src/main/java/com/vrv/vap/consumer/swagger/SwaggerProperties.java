@@ -3,6 +3,9 @@ package com.vrv.vap.consumer.swagger;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * @author wh1107066
+ */
 @Configuration
 @ConfigurationProperties(prefix = "springfox")
 public class SwaggerProperties {

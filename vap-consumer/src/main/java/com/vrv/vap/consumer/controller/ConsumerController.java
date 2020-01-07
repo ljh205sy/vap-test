@@ -1,12 +1,15 @@
 package com.vrv.vap.consumer.controller;
 
+import com.vrv.vap.consumer.service.ConsumerService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * @Author: liujinhui
@@ -14,13 +17,51 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/v1")
-@Api(tags = "需求管理")
+@Api(tags = "消费管理")
 public class ConsumerController {
     private Logger logger = LoggerFactory.getLogger(getClass());
+
+
+    @Autowired
+    private ConsumerService consumerService;
+
     @GetMapping("/consumer")
     @ApiOperation(value = "consumer查询", notes = "查询")
     public String consumer() {
-        logger.info("111");
+        logger.info("222");
         return "1";
+    }
+
+    /**
+     * redis中缓存的时间为3600秒
+     * redis中的键值为 cache:qax:aaa:2222
+     * @param str
+     * @return
+     */
+    @RequestMapping(value = "/echo/{str}", method = RequestMethod.GET)
+    @ApiOperation(value = "consumer测试que队列", notes = "打印")
+    public String consumer(@PathVariable String str) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String format = sdf.format(new Date());
+        logger.info("Try to get value， 时间：" + format);
+        String s = consumerService.cacheQax(str);
+        return s + ", " + format;
+    }
+
+
+    /**
+     * redis中缓存时间为300秒
+     * redis中的键值为 cache:menu:bbb:1111
+     * @param str
+     * @return
+     */
+    @RequestMapping(value = "/menu/{str}", method = RequestMethod.GET)
+    @ApiOperation(value = "consumer测试menu队列", notes = "打印")
+    public String menu(@PathVariable String str) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String format = sdf.format(new Date());
+        logger.info("Try to get value， 时间：" + format);
+        String s = consumerService.cacheMenu(str);
+        return s + ", " + format;
     }
 }

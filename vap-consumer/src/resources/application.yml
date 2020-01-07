@@ -5,7 +5,6 @@ spring:
     username: ${MYSQL_USER:root}
     password: ${MYSQL_PASSWORD:123456}
     url: jdbc:mysql://${MYSQL_HOST:127.0.0.1}:${MYSQL_PORT:3306}/hello?serverTimezone=UTC&useUnicode=true&useSSL=false&characterEncoding=UTF-8
-    driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
     maxActive: 20
     initialSize: 1
@@ -20,6 +19,21 @@ spring:
       ddl-auto: update
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
 
+  cache:
+    type: redis
+  redis:
+    host: ${REDIS_HOST:192.168.120.234}
+    port: ${REDIS_PORT:6379}
+    password: ${REDIS_PWD:vrv@1234}
+    timeout: 5000  # 连接超时时间（毫秒）
+    database: 1
+vap:
+  cache:
+    configs:
+      - key: menu
+        second: 300
+      - key: qax
+        second: 3600
 
 logging:
   level:
