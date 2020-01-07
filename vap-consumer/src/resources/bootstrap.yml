@@ -1,0 +1,8 @@
+spring:
+ application:
+    name:  vap-consumer
+ sleuth:
+    sampler:
+      percentage: 1.0
+# profiles:
+#   active: dev
